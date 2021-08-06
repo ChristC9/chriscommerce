@@ -1,0 +1,60 @@
+{% load static %}
+        <div class="container-fluid bg-dark">
+            <nav class="container navbar navbar-expand-lg navbar-light ">
+                <div class="container-fluid">
+                  <a href="{% url 'all-products' %}">
+                    <img src="{% static 'app/bplogo.jpg' %}" width="60" height="30" style="cursor: pointer;">
+                  </a>
+                  <a class="navbar-brand text-white ms-3" href="{% url 'all-products' %}">PHOTO-COMMERCE</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="{% url 'all-products' %}">Home</a>
+                      </li>
+                      
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          CategoryList
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="{% url 'all-categories' %}">All Categories</a></li>
+                          <li><a class="dropdown-item" href="{% url 'sub-categories' %}">Sub Categories</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                      </li>
+
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          User
+                        </a>
+                        
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          {% if user.is_authenticated %}
+                            <li class="dropdown-item">{{user.username}}</li>
+                            <li><a class="dropdown-item" href="{% url 'my-orders' %}">Check Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'user-logout' %}">Log Out</a></li>
+                          {% else %}
+                          <li><a class="dropdown-item" href="{% url 'user-login' %}">Log In</a></li>
+                          <li><a class="dropdown-item" href="{% url 'user-register' %}">Register</a></li>
+                          {% endif %}
+                          <!-- <li><hr class="dropdown-divider"></li> -->
+                          
+                        </ul>
+                      </li>
+                      <li class="nav-item" onclick="showcartView()" style="cursor:pointer ;">
+                        <a class="nav-link text-white">
+                          <span id ="count_id" class="cart_count" style="display: none;">0</span>
+                          <i class="material-icons">
+                            <span>shopping_cart</span>
+                          </i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+        </div>

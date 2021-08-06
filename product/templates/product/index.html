@@ -1,0 +1,79 @@
+{% extends 'app/base.html'%}
+{% block content %}
+    <h1 class=" text-center text-info my-5">All Products</h1>
+    {% if messages %}
+        {% for msg in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{msg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+    {% endif %}
+    <div class="container mt-3">
+        <div class="row">
+            {% for product in Products %}
+                <div class="col-md-4 mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{product.image.url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{product.name}}</li>
+                                <li class="list-group-item">{{product.category.name}} {{product.subcategory.name}}</li>
+                                <li class="list-group-item">${{product.price}}</li>
+                              </ul>
+                          <button onclick="addToCart('{{product.id}}')" class="btn btn-primary btn-sm float-end">
+                              <i class="material-icons">shopping_cart</i>
+                              <span>Add To Cart</span>
+                          </button>
+                        </div>
+                      </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        localStorage.removeItem('ordered_item');
+        document.getElementById('count_id').innerHTML=0;
+        let count_list=[];
+        
+        let addToCart =(id) =>{
+            
+            let index=count_list.indexOf(id);
+            if(index==-1){
+                count_list.push(id);
+            }
+            if(count_list.length!=0){
+                var x=document.querySelector('.cart_count');
+                if (x.style.display === "none") {
+                    x.style.display = "inline-block";
+                }
+            }
+           localStorage.setItem("ordered_item",JSON.stringify(count_list)); 
+           document.getElementById('count_id').innerHTML=count_list.length;
+        }
+        let initial_items=localStorage.getItem("ordered_item");
+        if(initial_items !=null){
+            count_list=JSON.parse(initial_items);
+           }
+        document.getElementById('count_id').innerHTML=count_list.length;
+        if(count_list.length!=0){
+                var x=document.querySelector('.cart_count');
+                if (x.style.display === "none") {
+                    x.style.display = "inline-block";
+                }
+            }
+
+
+    let showcartView = ()=>{
+
+        let orders=JSON.parse(localStorage.getItem("ordered_item"));
+        // alert(orders);
+        if(orders.length>0){
+            let order=orders.join(',');
+            console.log(order);
+            window.location.href=`http://127.0.0.1:8000/cartview/${order}`;
+        }
+        
+    }
+    </script>
+{% endblock %}

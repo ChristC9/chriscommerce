@@ -1,0 +1,12 @@
+{% extends 'app/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="col-md-6 offset-md-3">
+    <h1 class="text-info text-center my-5">Creation New SubCategory</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button class="btn btn-outline-primary btn-sm float-end">Create</button>
+    </form>
+</div>
+{% endblock %}

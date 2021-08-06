@@ -1,0 +1,43 @@
+{% extends 'app/base.html' %}
+{% block content %}
+{% load static %}
+    <h1 class="text-center text-info my-5">Sub Categories</h1>
+    <div class="container">
+        
+        <div class="col-md-8 offset-md-2">
+            <button class="btn btn-primary btn-sm my-1">
+                <a href="{% url 'create-form' %}" class="text-white text-decoration-none">Create</a>
+                <i class="material-icons my-1">add</i>
+            </button>
+            <table class="table table-bordered">
+                <thead class="bg-dark text-white">
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Parent</th>
+                    <th>Action</th>
+                </thead>
+                {% for subcat in subcats %}
+                <tbody>
+                    <td>{{subcat.id}}</td>
+                    <td>{{subcat.name}}</td>
+                    <td><img src="{{subcat.image.url}}" alt="" width="40px" height="40px"></td>
+                    <td>{{subcat.parent.name}}</td>
+                    <td>
+                        <a href="{% url 'sub-update' subcat.id %}">
+                            <button class="btn btn-warning btn-sm">
+                                <i class="material-icons">edit</i>
+                            </button>
+                        </a>
+                        <a href="{% url 'sub-delete' subcat.id %}">    
+                            <button class="btn btn-danger btn-sm">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </a>
+                    </td>
+                </tbody>
+                {% endfor %}
+              </table>
+        </div>
+    </div>
+{% endblock %}

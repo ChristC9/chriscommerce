@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+{% block content %}
+{% load static %}
+    <h1 class="text-info my-5 text-center">All Categories</h1>
+    
+    <div class="container">
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{msg}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+        {% endif %}
+        <table class="table table-bordered">
+            <thead>
+                <th>No</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Action</th>
+            </thead>
+            
+            {% for cat in cats%}
+            <tbody>
+                <td>{{cat.id}}</td>
+                <td>{{cat.name}}</td>
+                <td>
+                    <img src="{{cat.image.url}}" alt="" width="40px" height="40px">
+                </td>
+                <td>
+                    <a href="{% url 'sub-categories'%}">
+                        <button class="btn btn-warning btn-sm">
+                            <i class="material-icons">visibility</i>
+                        </button>
+                   </a>
+                   <!-- <button class="btn btn-danger btn-sm">
+                       <i class="material-icons">delete</i>
+                   </button> -->
+                </td>
+            </tbody>
+            {% endfor %}    
+        </table>
+    </div>
+{% endblock %}

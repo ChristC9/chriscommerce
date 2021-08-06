@@ -1,0 +1,52 @@
+{% extends 'app/base.html' %}
+{% block content %}
+
+
+        <h1 class="text-center text-info my-5"> Orders</h1>
+        <div class="col-md-10 offset-md-1">
+            <div class="accordion" id="accordionExample">
+                {% for order in orders %}
+                    <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{order.order.id}}" aria-expanded="true" aria-controls="collapse{{order.order.id}}">
+                      Order {{order.order.id}}
+                    </button>
+                  </h2>
+                  <div id="collapse{{order.order.id}}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">Total</th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody>
+                             
+                                {% for item in order.orderitem %}
+                                <tr>
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.name}}</td>
+                                    <td><img src="http://127.0.0.1:8000/media/{{item.image}}" width="50" height="50"></td>
+                                    <td>{{item.price}}</td>
+                                    <td>{{item.count}}</td>
+                                    <td>{{item.total}}</td>
+                                </tr>
+                                {% endfor %}
+                                <th colspan="5">Grand Total</th>
+                                <td>{{order.order.grandTotal}}</td>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}   
+            </div>
+        </div>
+
+{% endblock %}

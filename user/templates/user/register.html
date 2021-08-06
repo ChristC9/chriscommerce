@@ -1,0 +1,18 @@
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+        
+        <h1 class="text-center text-info my-5">Register Page</h1>
+        <div class="col-md-8 offset-md-2">
+            <form method="post">
+                
+                {% csrf_token %}
+                {{form | crispy }}
+
+                <button type="reset" class="btn btn-outline-warning btn-sm float-end ms-2">Cancel</button>
+                <button type="submit" class="btn btn-outline-primary btn-sm float-end">Register</button>
+        </form>
+        </div>
+    
+
+{% endblock %}
