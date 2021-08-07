@@ -62,7 +62,7 @@
                 <tr>        
                         <td>${++index}</td>
                         <td>${product.name}</td>
-                        <td><img src="http://127.0.0.1:8000/media/${product.image}" width="50" height="50"></td>
+                        <td><img src="https://nyanhtetcommerce.herokuapp.com/media/${product.image}" width="50" height="50"></td>
                         <td>
                             <button onclick="qtyControl(${product.id},true)" class="btn btn-success btn-sm"><i class="material-icons">add</i></button>
                             <span>${product.count}</span>
@@ -129,7 +129,7 @@
                
             });
             orderList=orderList.slice(0,orderList.length-1);
-            window.location.href=`http://127.0.0.1:8000/checkout/${orderList}`;
+            window.location.href=`https://nyanhtetcommerce.herokuapp.com/checkout/${orderList}`;
         }
         
     </script>
